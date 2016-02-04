@@ -1,0 +1,107 @@
+HTML code
+
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+    10
+    11
+    12
+    13
+    14
+    15
+    16
+    17
+    18
+    19
+    	
+    <div>
+     <input type="button" value="Add" class="plusbtn" />
+     <input type="button" value="Remove" class="minusbtn" />
+    </div>
+     
+    <table width="50%" border="1" cellpadding="1" cellspacing="1" class="test">
+     <tr>
+     <td>Name</td>
+     <td>Emp no.</td>
+     <td>Company</td>
+     <td>Mobile no.</td>
+     </tr>
+     <tr>
+     <td><input type="text" class="txtbox" value="" /></td>
+     <td><input type="text" class="txtbox" value="" /></td>
+     <td><input type="text" class="txtbox" value="" /></td>
+     <td><input type="text" class="txtbox" value="" /></td>
+     </tr>
+    </table>
+
+A small styling we need CSS code
+
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+    10
+    11
+    12
+    13
+    14
+    	
+    <style>
+    .txtbox {
+     border: none;
+     width: 100%;
+    }
+    input {
+     font-size: 17px;
+     height: 30px;
+    }
+    table {
+     background: none repeat scroll 0 0 #abcdef;
+     border: 1px solid #000;
+    }
+    </style>
+
+So we are done with HTML and CSS part we now just left with the Jquery write code for functionality for add and remove button.
+
+    1
+    2
+    3
+    4
+    5
+    6
+    7
+    8
+    9
+    10
+    11
+    12
+    13
+    14
+    15
+    	
+    $(document).ready(function(){
+         $('.plusbtn').click(function() {
+               $(".test").append('<tr><td><input type="text" class="txtbox" value="" /></td><td><input type="text" class="txtbox" value="" /></td><td><input type="text" class="txtbox" value="" /></td><td><input type="text" class="txtbox" value="" /></td></tr>');
+         });
+       $('.minusbtn').click(function() {
+           if($(".test tr").length != 2)
+             {
+                $(".test tr:last-child").remove();
+             }
+          else
+             {
+                alert("You cannot delete first row");
+             }
+        });
+    });

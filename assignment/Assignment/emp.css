@@ -1,0 +1,73 @@
+public class Student
+{   public string RNumber { get;set;}
+    public string FName { get;set;}
+    public string LName { get; set; }
+    public string Subject { get; set; }
+    public DateTime CreatedDate { get; set; }
+}
+
+    public static string Constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;  
+    [WebMethod]    
+    public static string SaveData(string studdata)//WebMethod to Save the data  
+    {    
+        var serializeData = JsonConvert.DeserializeObject<List<Student>>(studdata);    
+        using (var con = new SqlConnection(Constr))    
+        {    
+            foreach (var data in serializeData)    
+            {    
+                using (var cmd = new SqlCommand("INSERT INTO Student VALUES(2RNumber,@Fname, @Lname,@Subject,@CreatedDate)"))    
+                {    
+                    cmd.CommandType = CommandType.Text;   
+                    cmd.Parameters.AddWithValue("@RNumber", data.RNumber);  
+                    cmd.Parameters.AddWithValue("@Fname", data.FName);    
+                    cmd.Parameters.AddWithValue("@Lname", data.LName);    
+                    cmd.Parameters.AddWithValue("@subject", data.Subject);    
+                    cmd.Parameters.AddWithValue("@CreatedDate", DateTime.Now);    
+                    cmd.Connection = con;    
+                    if (con.State == ConnectionState.Closed)    
+                    {    
+                        con.Open();    
+                    }    
+                    cmd.ExecuteNonQuery();    
+                    con.Close();    
+                }    
+            }    
+        }    
+        return null;    
+    }  
+
+    function getAllStudData() {    
+        var data = [];    
+        $('tr.stud_info').each(function () { 
+            var rollNo = $(this).find('.r-number01').val();   
+            var firstName = $(this).find('.f-name01').val();//Bind to the first name with class f-name01  
+            var lastName = $(this).find('.l-name01').val();//Bind to the last name with class l-name01  
+            var subject = $(this).find('.sub01').val();//Bind to the emailId with class email01  
+            var alldata = {    
+                'RNumber': rollNo,
+                'FName': firstName, //FName as per Employee class name in .cs  
+                'LName': lastName, //LName as per Employee class name in .cs  
+                'subject': Subject//EmailId as per Employee class name in .cs   
+            }    
+            data.push(alldata);    
+        });    
+        console.log(data);//  
+        return data;    
+    }    
+    $("#btnSubmit").click(function () {    
+        var data = JSON.stringify(getAllStudData());    
+        //console.log(data);    
+        $.ajax({    
+            url: 'Home.aspx/SaveData',//Home.aspx is the page   
+            type: 'POST',    
+            dataType: 'json',    
+            contentType: 'application/json; charset=utf-8',    
+            data: JSON.stringify({ 'studdata': data }),    
+            success: function () {    
+                alert("Data Added Successfully");    
+            },    
+            error: function () {    
+                alert("Error while inserting data");    
+            }    
+        });    
+    });  

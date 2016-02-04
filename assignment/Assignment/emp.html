@@ -1,0 +1,44 @@
+<hmtl>
+<head runat="server">  
+    <title>Demo</title>  
+    <meta charset="utf-8" />  
+    <meta name="viewport" content="width=device-width, initial-scale=1" />  
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>  
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>  
+    <script type="text/javascript" src="emp.js"></script>
+</head>  
+<body>  
+    <form id="form1" runat="server">  
+        <div class="container">  
+            <h2>Student Information Table</h2>  
+            <table class="table" id="maintable">  
+                <thead>  
+                    <tr> 
+                        <th>Roll_No</th>  
+                        <th>Firstname</th>  
+                        <th>Lastname</th>  
+                        <th>Subject</th>  
+                    </tr>  
+                </thead>  
+                <tbody>  
+                    <tr class="stud_info"> 
+                        <td>  
+                            <input type="text" name="r-number" class="form-control r-number01" /></td> 
+                        <td>  
+                            <input type="text" name="f-name" class="form-control f-name01" /></td>  
+                        <td>  
+                            <input type="text" name="l-name" class="form-control l-name01" /></td>  
+                        <td>  
+                            <input type="text" name="Subject" class="form-control sub-01" /></td>  
+                        <td>  
+                            <button type="button" id="btnAdd" class="btn btn-xs btn-primary classAdd">Add More</button>  
+                        </td>  
+                    </tr>  
+                </tbody>  
+            </table>  
+             
+        </div>  
+    </form>  
+</body>    
+</html>
